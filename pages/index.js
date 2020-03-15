@@ -1,3 +1,9 @@
+import Stats from '../components/Stats';
+
 export default function IndexPage() {
-    return <p>Hey</p>;
-}
+  return (
+    <div>
+      <Stats />
+    </div>
+  );
+};

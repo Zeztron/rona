@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
 
-export default function useStats() {
+export default function useStats(url) {
   const [stats, setStats] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
   useEffect(() => {
     async function fetchData() {
-      console.log('fetching data...')
-      const data = await fetch('https://covid19.mathdro.id/api')
-        .then(response => response.json());
+      setLoading(true);
+      const data = await fetch(url)
+        .then(response => response.json())
+        .catch(err => setError(err));
       setStats(data);
+      setLoading(false);
     }
     fetchData();
-  }, []);
-  return stats;
+  }, [url]);
+  return {
+    stats,
+    loading, 
+    error
+  }
 }

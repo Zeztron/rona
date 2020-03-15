@@ -7,6 +7,7 @@ export default function useStats(url) {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
+      setError();
       const data = await fetch(url)
         .then(response => response.json())
         .catch(err => setError(err));
